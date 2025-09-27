@@ -9,8 +9,6 @@
 
 This repository contains **end-to-end test automation scripts** written in **Playwright (TypeScript)** for the [TutorialsNinja Demo](https://tutorialsninja.com/demo/) e-commerce application.
 
-The project is designed for practicing **QA automation**, following best practices like Page Object Model (POM), parallel test execution, and reusable fixtures.
-
 ---
 
 ## 📌 Features
