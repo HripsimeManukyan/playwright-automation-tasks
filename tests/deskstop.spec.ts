@@ -21,7 +21,7 @@ test.describe('Desktops', () => {
 
   });
 
-  test.only('Mac', async ({ page }) => {
+  test('Mac', async ({ page }) => {
     await page.getByRole('link', { name: 'Desktops', exact: true }).hover();
     await page.getByRole('link', { name: 'Mac (1)' }).click();
     await expect(page.getByRole('heading', { name: 'Mac', exact: true })).toBeVisible();

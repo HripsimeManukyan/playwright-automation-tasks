@@ -6,7 +6,7 @@ test.describe('Add to Cart Functionality', () => {
         await page.goto('https://tutorialsninja.com/demo/index.php?route=common/home');
     });
 
-    test('should add the product and validate in header, dropdown, and remove from cart', async ({ page }) => {
+    test('should add the product, validate in header, dropdown, and remove from cart', async ({ page }) => {
 
         const productName = 'MacBook';
 
@@ -46,7 +46,7 @@ test.describe('Add to Cart Functionality', () => {
 
 
 
-test.describe.only('View Cart Functionality', () => {
+test.describe('View Cart Functionality', () => {
     test.beforeEach(async ({ page }) => {
         await page.goto('https://tutorialsninja.com/demo/index.php?route=common/home', { waitUntil: 'networkidle' });;
         await page.getByRole('button', { name: ' Add to Cart' }).first().click();
@@ -77,11 +77,20 @@ test.describe.only('View Cart Functionality', () => {
 
 
     });
-    
+
     test('should remove product and show empty cart message', async ({ page }) => {
         const cartTable = page.locator('.table-responsive');
         await cartTable.getByRole('button', { name: '' }).click();
         await expect(page.locator('#content').getByText('Your shopping cart is empty!')).toBeVisible();
+    });
+
+    test('should handle invalid quantity input (negative number)', async ({ page }) => {
+        const quantityInput = page.locator('.table-responsive input[name*="quantity"]');
+        await quantityInput.fill('-3');
+        const updateButton = await page.getByRole('button', { name: '' })
+        await updateButton.click();
+        await expect(page.locator('#content')).toContainText('Your shopping cart is empty!');
+
     });
 });
 
